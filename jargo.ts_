@@ -1,0 +1,37 @@
+type JargoWord = {
+  original: string;
+  translation: string;
+};
+
+const jargoWords: JargoWord[] = [
+  { original: "fregado", translation: "estruviate" },
+  { original: "trol", translation: "engendrador" },
+  { original: "pwned", translation: "derrotado" },
+  { original: "noob", translation: "novato" },
+  { original: "hax", translation: "trampa" },
+];
+
+function translate(word: string): string | null {
+  const jargoWord = jargoWords.find((w) => w.original.toLowerCase() === word.toLowerCase());
+  return jargoWord ? jargoWord.translation : null;
+}
+
+function jargo(input: string): string {
+  const words = input.split(" ");
+  let translated = "";
+
+  for (const word of words) {
+    const translation = translate(word);
+    if (translation) {
+      translated += translation + " ";
+    } else {
+      translated += word + " ";
+    }
+  }
+
+  return translated.trim();
+}
+
+// Ejemplo de uso
+console.log(jargo("Estoy fregado, noob.")); // Output: "Estruviate, engendrador."
+console.log(jargo("Mi PC fue pwned.")); // Output: "Mi PC fue derrotado."
